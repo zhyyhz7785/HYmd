@@ -1,0 +1,36 @@
+/* HyMD Editor — VS Code theme integration */
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: var(--vscode-editor-background, #1e1e1e);
+  color: var(--vscode-editor-foreground, #d4d4d4);
+}
+
+#editor-root {
+  height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
+}
+
+body[data-theme='light'] {
+  --hymd-accent: #4772b3;
+}
+
+body[data-theme='dark'] {
+  --hymd-accent: #6ea8fe;
+}
+
+body[data-theme='high-contrast'] {
+  --hymd-accent: #1aebff;
+}
+
+.milkdown {
+  height: 100%;
+}
+
+.milkdown .ProseMirror {
+  min-height: 100vh;
+  padding: 24px 32px 48px;
+  outline: none;
+}

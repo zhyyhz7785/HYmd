@@ -7,9 +7,12 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "npm run build -w @hymd/parser",
-    "test": "npm run test -w @hymd/parser",
-    "typecheck": "npm run typecheck -w @hymd/parser"
+    "build": "npm run build -w @hymd/parser && npm run build -w hymd-editor",
+    "build:parser": "npm run build -w @hymd/parser",
+    "build:vscode": "npm run build -w hymd-editor",
+    "sync:fork": "node scripts/sync-to-fork.mjs",
+    "test": "npm run test -w @hymd/parser && npm run test -w hymd-editor",
+    "typecheck": "npm run typecheck -w @hymd/parser && npm run typecheck -w hymd-editor"
   },
   "engines": {
     "node": ">=20"

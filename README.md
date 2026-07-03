@@ -42,6 +42,26 @@ const roundtrip = serializeHymd(doc);
 - [x] parse → serialize → parse 语义等价
 - [x] 5 个主流 md 渲染器降级测试（扩展块输出为 `<pre><code>`）
 
+## M1 — VS Code 扩展 + HYmd Code Fork
+
+| 组件 | 路径 | 说明 |
+|---|---|---|
+| VS Code 扩展 | [packages/hymd-vscode](packages/hymd-vscode) | Milkdown Crepe WYSIWYG + HyMD 块卡片 |
+| Fork 同步 | `npm run sync:fork` | 产物 → `../hymd-code/extensions/hymd-editor` |
+| HYmd Code | `../hymd-code` | Code-OSS 1.99.3 fork，仅改 product.json + 内置扩展 |
+
+### 扩展开发（F5，无需 fork 构建）
+
+```powershell
+npm run build:vscode
+# 在 Cursor/VS Code 打开 HYmd 仓库，F5 启动 Extension Development Host
+# 打开 samples/*.hymd.md 即进入 WYSIWYG
+```
+
+### HYmd Code 构建
+
+见 [../hymd-code/README-HYMD.md](../hymd-code/README-HYMD.md)（需 Node 20.18.2 + `npm ci && npm run compile`）
+
 ## 手动验证清单（AI 假设验证，M0 不自动化）
 
 1. 用 GPT/Claude 生成含 `sheet` / `slide` 块的 HyMD 片段，检查语法是否符合 [spec/hymd-spec-v0.1.md](spec/hymd-spec-v0.1.md)
