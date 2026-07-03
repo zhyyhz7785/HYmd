@@ -1,5 +1,5 @@
 import * as esbuild from 'esbuild';
-import { cpSync, mkdirSync, rmSync } from 'node:fs';
+import { cpSync, mkdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -42,15 +42,15 @@ const webviewBuild = {
 };
 
 async function copyStaticAssets() {
-  rmSync(mediaOut, { recursive: true, force: true });
   mkdirSync(mediaOut, { recursive: true });
   cpSync(join(__dirname, 'media'), mediaOut, { recursive: true });
 }
 
 async function buildOnce() {
+  mkdirSync(mediaOut, { recursive: true });
+  cpSync(join(__dirname, 'media'), mediaOut, { recursive: true });
   await esbuild.build(extensionBuild);
   await esbuild.build(webviewBuild);
-  await copyStaticAssets();
   console.log('hymd-vscode build complete');
 }
 
