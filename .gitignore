@@ -5,5 +5,7 @@ dist/
 Thumbs.db
 *.tsbuildinfo
 coverage/
-.vscode/
+.vscode/*
+!.vscode/launch.json
+!.vscode/tasks.json
 .idea/
