@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hymd.dev/schemas/block-sheet.schema.json",
+  "title": "HyMD Sheet Block Body",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "rows": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "cols": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "snapshot": {
+      "type": "string",
+      "description": "Univer snapshot JSON 相对路径或内联 data URI"
+    },
+    "data": {
+      "description": "内联 snapshot 对象（M1 实现）"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hymd.dev/schemas/block-layout.schema.json",
+  "title": "HyMD Layout Block Body",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "width_mm": {
+      "type": "number",
+      "minimum": 0
+    },
+    "height_mm": {
+      "type": "number",
+      "minimum": 0
+    },
+    "anchor": {
+      "type": "string",
+      "description": "锚点，如 column-1、page-break-before"
+    },
+    "preset": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hymd.dev/schemas/block-slide.schema.json",
+  "title": "HyMD Slide Block Body",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "theme": {
+      "type": "string",
+      "description": "Marp 主题名"
+    },
+    "source": {
+      "type": "string",
+      "description": "Marp 子文档相对路径"
+    },
+    "slides": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "内联幻灯 md 片段（可选）"
+    }
+  }
+}

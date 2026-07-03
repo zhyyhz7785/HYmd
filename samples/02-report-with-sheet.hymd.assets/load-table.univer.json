@@ -1,0 +1,25 @@
+{
+  "id": "load-table-demo",
+  "name": "荷载表示例",
+  "sheetOrder": ["sheet1"],
+  "sheets": {
+    "sheet1": {
+      "id": "sheet1",
+      "name": "荷载",
+      "rowCount": 20,
+      "columnCount": 8,
+      "cellData": {
+        "0": {
+          "0": { "v": "项目" },
+          "1": { "v": "恒载(kN/m²)" },
+          "2": { "v": "活载(kN/m²)" }
+        },
+        "1": {
+          "0": { "v": "楼面" },
+          "1": { "v": 3.5 },
+          "2": { "v": 2.0 }
+        }
+      }
+    }
+  }
+}
