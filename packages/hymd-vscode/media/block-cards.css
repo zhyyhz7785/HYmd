@@ -145,6 +145,69 @@ body[data-ui='hymd'] pre.hymd-block-card[data-hymd-block='sheet'] {
   padding-bottom: 8px !important;
 }
 
+body[data-ui='hymd'] pre.hymd-block-card[data-hymd-block='slide'] {
+  padding-bottom: 8px !important;
+}
+
+body[data-ui='hymd'] .hymd-slide-card-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+  padding: 0 4px;
+}
+
+body[data-ui='hymd'] .hymd-slide-card-meta {
+  font-size: 11px;
+  opacity: 0.75;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  min-width: 0;
+}
+
+body[data-ui='hymd'] .hymd-slide-card-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+body[data-ui='hymd'] .hymd-slide-open-btn,
+body[data-ui='hymd'] .hymd-slide-export-btn {
+  font-size: 12px;
+  padding: 2px 4px;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: var(--vscode-textLink-foreground, var(--vscode-focusBorder, #4772b3));
+  cursor: pointer;
+}
+
+body[data-ui='hymd'] .hymd-slide-open-btn:hover,
+body[data-ui='hymd'] .hymd-slide-export-btn:hover {
+  text-decoration: underline;
+}
+
+body[data-ui='hymd'] .hymd-slide-preview-host {
+  min-height: 140px;
+  max-height: 280px;
+  overflow: hidden;
+  border-radius: 4px;
+  border: 1px solid var(--vscode-widget-border, #454545);
+  background: #fff;
+}
+
+body[data-ui='hymd'] .hymd-slide-preview-inner {
+  padding: 8px;
+  overflow: hidden;
+}
+
+body[data-ui='hymd'] .hymd-slide-preview-content section {
+  color: #222;
+}
+
 body[data-ui='hymd'] .hymd-sheet-edit-btn {
   font-size: 12px;
   padding: 2px 4px;
@@ -210,6 +273,55 @@ body[data-ui='vscode'] pre.hymd-block-card[data-hymd-block='sheet'] {
 
 body[data-ui='vscode'] pre.hymd-block-card[data-hymd-block='slide'] {
   border-left: 4px solid #a855f7;
+  padding-bottom: 8px !important;
+}
+
+body[data-ui='vscode'] .hymd-slide-card-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+  padding: 0 4px;
+}
+
+body[data-ui='vscode'] .hymd-slide-card-meta {
+  font-size: 11px;
+  opacity: 0.8;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+
+body[data-ui='vscode'] .hymd-slide-card-actions {
+  display: flex;
+  gap: 6px;
+}
+
+body[data-ui='vscode'] .hymd-slide-open-btn,
+body[data-ui='vscode'] .hymd-slide-export-btn {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid #a855f7;
+  background: color-mix(in srgb, #a855f7 12%, transparent);
+  color: inherit;
+  cursor: pointer;
+}
+
+body[data-ui='vscode'] .hymd-slide-open-btn:hover,
+body[data-ui='vscode'] .hymd-slide-export-btn:hover {
+  background: color-mix(in srgb, #a855f7 22%, transparent);
+}
+
+body[data-ui='vscode'] .hymd-slide-preview-host {
+  min-height: 140px;
+  max-height: 280px;
+  overflow: hidden;
+  border-radius: 6px;
+  border: 1px solid color-mix(in srgb, #a855f7 30%, transparent);
+  background: #fff;
 }
 
 body[data-ui='vscode'] pre.hymd-block-card[data-hymd-block='layout'] {

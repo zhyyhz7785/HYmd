@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 import { HymdEditorProvider } from './editorProvider.js';
 import { LayoutPreviewManager } from './layoutPreviewPanel.js';
 import { registerSheetCommands } from './sheetCommands.js';
+import { registerExportCommands } from './exportCommands.js';
 
 interface HymdTabState {
   uri: vscode.Uri;
@@ -39,6 +40,7 @@ export function activate(context: vscode.ExtensionContext): void {
   );
 
   registerSheetCommands(context);
+  registerExportCommands(context);
 
   context.subscriptions.push(
     vscode.commands.registerCommand('hymd.toggleUiStyle', async () => {

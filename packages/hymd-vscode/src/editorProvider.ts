@@ -8,6 +8,8 @@ import {
 } from './sync/documentSync.js';
 import { joinFrontmatter, splitFrontmatter } from './sync/frontmatterGuard.js';
 import { readSheetSnapshot, writeSheetSnapshot } from './sheetAssets.js';
+import { readSlideSource, slideSourceUri } from './slideAssets.js';
+import { handleWebviewExportRequest } from './exportCommands.js';
 
 const DEBOUNCE_MS = 220;
 
@@ -186,6 +188,41 @@ export class HymdEditorProvider implements vscode.CustomTextEditorProvider {
           break;
         case 'overlayState':
           overlayOpen = raw.open;
+          break;
+        case 'requestSlideSource':
+          try {
+            const slide = await readSlideSource(document.uri, raw.blockId, document.getText());
+            postToWebview({
+              type: 'slideSourceData',
+              blockId: raw.blockId,
+              markdown: slide.markdown,
+              sourcePath: slide.sourcePath,
+            });
+          } catch (e) {
+            postToWebview({
+              type: 'slideSourceData',
+              blockId: raw.blockId,
+              error: e instanceof Error ? e.message : String(e),
+            });
+          }
+          break;
+        case 'openSlideSource': {
+          const uri = slideSourceUri(document.uri, raw.blockId, document.getText());
+          if (uri) {
+            const doc = await vscode.workspace.openTextDocument(uri);
+            await vscode.window.showTextDocument(doc, { preview: false });
+          } else {
+            void vscode.window.showInformationMessage('该 slide 块为内联内容，无独立源文件');
+          }
+          break;
+        }
+        case 'requestExport':
+          await handleWebviewExportRequest(
+            this.context,
+            document.uri,
+            raw.format,
+            raw.blockId,
+          );
           break;
         case 'log':
           console.log('[hymd-webview]', raw.message);

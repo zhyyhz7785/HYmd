@@ -1,10 +1,12 @@
 import {
   extractBlockId,
+  extractSlideSourcePath,
   extractSnapshotPath,
   isHymdBlockLang,
   type WebviewToHostMessage,
 } from './protocol.js';
 import { registerSheetPreview, disposeRemovedPreviews } from './sheetPreview.js';
+import { registerSlidePreview, disposeRemovedSlidePreviews } from './slidePreview.js';
 import { openSheetOverlay } from './sheetOverlay.js';
 
 const BLOCK_LABELS: Record<string, string> = {
@@ -32,6 +34,7 @@ export function decorateHymdBlocks(root: HTMLElement | null): void {
   if (!root || !postMessageFn) return;
 
   const activeSheetIds = new Set<string>();
+  const activeSlideIds = new Set<string>();
 
   root.querySelectorAll('pre code').forEach((codeEl) => {
     const code = codeEl as HTMLElement;
@@ -69,12 +72,16 @@ export function decorateHymdBlocks(root: HTMLElement | null): void {
     if (blockType === 'sheet' && blockId) {
       activeSheetIds.add(blockId);
       setupSheetCard(pre, blockId, body, postMessageFn!);
+    } else if (blockType === 'slide' && blockId) {
+      activeSlideIds.add(blockId);
+      setupSlideCard(pre, blockId, body, postMessageFn!);
     } else {
       code.style.display = '';
     }
   });
 
   disposeRemovedPreviews(activeSheetIds);
+  disposeRemovedSlidePreviews(activeSlideIds);
 }
 
 function setupSheetCard(
@@ -120,5 +127,65 @@ function setupSheetCard(
     pre.appendChild(previewWrap);
 
     registerSheetPreview(blockId, previewHost, postMessage);
+  }
+}
+
+function setupSlideCard(
+  pre: HTMLElement,
+  blockId: string,
+  body: string,
+  postMessage: (msg: WebviewToHostMessage) => void,
+): void {
+  const code = pre.querySelector('code');
+  if (code) (code as HTMLElement).style.display = 'none';
+
+  let previewWrap = pre.querySelector('.hymd-slide-preview-wrap') as HTMLElement | null;
+  if (!previewWrap) {
+    previewWrap = document.createElement('div');
+    previewWrap.className = 'hymd-slide-preview-wrap';
+
+    const toolbar = document.createElement('div');
+    toolbar.className = 'hymd-slide-card-toolbar';
+
+    const meta = document.createElement('span');
+    meta.className = 'hymd-slide-card-meta';
+    const src = extractSlideSourcePath(body);
+    meta.textContent = src ? src : '内嵌幻灯';
+
+    const actions = document.createElement('div');
+    actions.className = 'hymd-slide-card-actions';
+
+    const openBtn = document.createElement('button');
+    openBtn.type = 'button';
+    openBtn.className = 'hymd-slide-open-btn';
+    openBtn.textContent = '打开源文档';
+    openBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      postMessage({ type: 'openSlideSource', blockId });
+    });
+
+    const exportBtn = document.createElement('button');
+    exportBtn.type = 'button';
+    exportBtn.className = 'hymd-slide-export-btn';
+    exportBtn.textContent = '导出 pptx';
+    exportBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      postMessage({ type: 'requestExport', format: 'pptx', blockId });
+    });
+
+    actions.append(openBtn, exportBtn);
+    toolbar.append(meta, actions);
+
+    const previewHost = document.createElement('div');
+    previewHost.className = 'hymd-slide-preview-host';
+    previewHost.dataset.blockId = blockId;
+    previewHost.setAttribute('contenteditable', 'false');
+
+    previewWrap.append(toolbar, previewHost);
+    pre.appendChild(previewWrap);
+
+    registerSlidePreview(blockId, previewHost, postMessage);
   }
 }

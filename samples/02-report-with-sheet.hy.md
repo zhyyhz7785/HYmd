@@ -38,4 +38,3 @@ width_mm: 160
 height_mm: 40
 anchor: column-1
 ```
-

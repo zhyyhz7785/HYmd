@@ -20,7 +20,15 @@ export async function exportPptx(options: ExportOptions): Promise<PptxExportResu
   const prepared = prepareExport(options);
   const warnings = [...prepared.transform.warnings];
 
-  if (prepared.transform.slides.length > 0) {
+  let slides = prepared.transform.slides;
+  if (options.blockId) {
+    slides = slides.filter((s) => s.blockId === options.blockId);
+    if (slides.length === 0) {
+      throw new Error(`未找到 slide 块：${options.blockId}`);
+    }
+  }
+
+  if (slides.length > 0) {
     const marp = resolveMarpCli(options.marpPath, options.marpResolveDir);
     const browser = resolveBrowser(options.browserPath);
     if (!browser) {
@@ -29,7 +37,7 @@ export async function exportPptx(options: ExportOptions): Promise<PptxExportResu
 
     const outPaths: string[] = [];
     await withTempDir(async (tmp) => {
-      for (const slide of prepared.transform.slides) {
+      for (const slide of slides) {
         const input = slide.sourcePath
           ? isAbsolute(slide.sourcePath)
             ? slide.sourcePath

@@ -1,6 +1,7 @@
 export {
   DEFAULT_HYMD_UI_STYLE,
   extractBlockId,
+  extractSlideSourcePath,
   extractSnapshotPath,
   hasInlineData,
   HymdBlockTypes,

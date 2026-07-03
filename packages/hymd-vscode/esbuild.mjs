@@ -20,7 +20,7 @@ const extensionBuild = {
   outfile: join(__dirname, 'dist', 'extension.js'),
   platform: 'node',
   format: 'cjs',
-  external: ['vscode'],
+  external: ['vscode', '@hymd/export'],
   target: 'node18',
   alias: {
     '@hymd/webview-core/protocol': join(__dirname, '..', 'hymd-webview-core', 'src', 'protocol.ts'),

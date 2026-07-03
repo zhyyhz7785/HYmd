@@ -1,6 +1,7 @@
 export {
   DEFAULT_HYMD_UI_STYLE,
   extractBlockId,
+  extractSlideSourcePath,
   extractSnapshotPath,
   hasInlineData,
   HymdBlockTypes,
@@ -31,6 +32,12 @@ export {
   registerSheetPreview,
   refreshSheetPreview,
 } from './sheetPreview.js';
+export {
+  disposeAllSlidePreviews,
+  handleSlideSourceMessage,
+  registerSlidePreview,
+  renderSlideThumbnail,
+} from './slidePreview.js';
 export {
   closeSheetOverlay,
   handleSheetSavedMessage,

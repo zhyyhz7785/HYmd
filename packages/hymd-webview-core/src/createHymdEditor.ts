@@ -16,6 +16,10 @@ import {
   handleSheetSnapshotMessage,
 } from './sheetPreview.js';
 import {
+  disposeAllSlidePreviews,
+  handleSlideSourceMessage,
+} from './slidePreview.js';
+import {
   handleSheetSavedMessage,
   handleSheetSnapshotForOverlay,
   initSheetOverlay,
@@ -129,6 +133,7 @@ export function createHymdEditor(options: CreateHymdEditorOptions): HymdEditorHa
       return;
     }
     disposeAllSheetPreviews();
+    disposeAllSlidePreviews();
     await crepe.editor.action(replaceAll(content));
     decorateHymdBlocks(editorRoot);
   }
@@ -151,12 +156,15 @@ export function createHymdEditor(options: CreateHymdEditorOptions): HymdEditorHa
       handleSheetSnapshotMessage(msg);
       handleSheetSnapshotForOverlay(msg);
       handleSheetSavedMessage(msg);
+      handleSlideSourceMessage(msg);
     } else {
       if (msg.type === 'sheetSnapshotData') {
         handleSheetSnapshotMessage(msg);
         handleSheetSnapshotForOverlay(msg);
       } else if (msg.type === 'sheetSaved') {
         handleSheetSavedMessage(msg);
+      } else if (msg.type === 'slideSourceData') {
+        handleSlideSourceMessage(msg);
       }
     }
 

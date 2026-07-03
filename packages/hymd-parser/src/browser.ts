@@ -20,6 +20,8 @@ export {
   sheetDimensions,
 } from './sheet.js';
 export type { SheetSource } from './sheet.js';
+export { resolveSlideSource, slideTheme } from './slide.js';
+export type { SlideSource } from './slide.js';
 export type {
   BlockTypeDefinition,
   HymdBlock,

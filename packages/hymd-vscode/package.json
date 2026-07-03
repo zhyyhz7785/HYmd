@@ -54,6 +54,21 @@
           ],
           "default": "hymd",
           "description": "HyMD WYSIWYG 编辑器 UI 皮肤"
+        },
+        "hymd.export.pandocPath": {
+          "type": "string",
+          "default": "pandoc",
+          "description": "Pandoc 可执行文件路径（docx/pptx/PDF 导出）"
+        },
+        "hymd.export.marpPath": {
+          "type": "string",
+          "default": "",
+          "description": "Marp CLI 路径；留空则自动从 workspace node_modules 解析"
+        },
+        "hymd.export.browserPath": {
+          "type": "string",
+          "default": "",
+          "description": "Edge/Chrome 路径（PDF 打印与 Marp 渲染）；留空则自动探测"
         }
       }
     },
@@ -78,6 +93,26 @@
         "command": "hymd.openLayoutPreview",
         "title": "HyMD: 打开排版预览",
         "icon": "$(open-preview)"
+      },
+      {
+        "command": "hymd.export.docx",
+        "title": "HyMD: 导出 Word (docx)"
+      },
+      {
+        "command": "hymd.export.pptx",
+        "title": "HyMD: 导出 PowerPoint (pptx)"
+      },
+      {
+        "command": "hymd.export.pdf",
+        "title": "HyMD: 导出 PDF"
+      },
+      {
+        "command": "hymd.export.all",
+        "title": "HyMD: 一键导出 (docx + pptx + pdf)"
+      },
+      {
+        "command": "hymd.export.pick",
+        "title": "HyMD: 选择格式导出"
       }
     ],
     "menus": {
@@ -99,6 +134,7 @@
   },
   "dependencies": {
     "@hymd/blocks-sheet": "*",
+    "@hymd/export": "*",
     "@hymd/layout": "*",
     "@hymd/parser": "*",
     "@hymd/webview-core": "*"

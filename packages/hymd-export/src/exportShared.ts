@@ -11,6 +11,8 @@ export interface ExportOptions {
   markdown?: string;
   /** 输出目录；默认 `<docDir>/<stem>.exports` */
   outDir?: string;
+  /** 仅导出指定 slide 块（pptx 模式） */
+  blockId?: string;
   pandocPath?: string;
   marpPath?: string;
   /** 解析依赖树中 marp-cli 的起始目录（扩展宿主场景传扩展根目录） */

@@ -47,7 +47,7 @@ export type WebviewToHostMessage =
   | { type: 'overlayState'; open: boolean }
   | { type: 'requestSlideSource'; blockId: string }
   | { type: 'openSlideSource'; blockId: string }
-  | { type: 'requestExport'; format: HymdExportFormat }
+  | { type: 'requestExport'; format: HymdExportFormat; blockId?: string }
   | { type: 'readFile'; requestId: string; relPath: string }
   | { type: 'writeFile'; requestId: string; relPath: string; content: string };
 
@@ -71,6 +71,12 @@ export function extractBlockId(lang: string, body: string): string | undefined {
 /** 从块体 YAML 文本解析 snapshot 路径 */
 export function extractSnapshotPath(body: string): string | undefined {
   const m = /^snapshot:\s*(.+)$/m.exec(body);
+  return m?.[1]?.trim();
+}
+
+/** 从 slide 块体解析外置 Marp 源路径 */
+export function extractSlideSourcePath(body: string): string | undefined {
+  const m = /^source:\s*(.+)$/m.exec(body);
   return m?.[1]?.trim();
 }
 
