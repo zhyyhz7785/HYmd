@@ -8,8 +8,13 @@
   "engines": {
     "vscode": "^1.96.0"
   },
-  "categories": ["Other"],
-  "activationEvents": ["onCustomEditor:hymd.editor"],
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCustomEditor:hymd.editor",
+    "onCommand:hymd.openLayoutPreview"
+  ],
   "main": "./dist/extension.js",
   "contributes": {
     "customEditors": [
@@ -17,7 +22,9 @@
         "viewType": "hymd.editor",
         "displayName": "HyMD WYSIWYG",
         "selector": [
-          { "filenamePattern": "*.hymd.md" }
+          {
+            "filenamePattern": "*.hy.md"
+          }
         ],
         "priority": "default"
       },
@@ -25,35 +32,87 @@
         "viewType": "hymd.editor",
         "displayName": "HyMD WYSIWYG",
         "selector": [
-          { "filenamePattern": "*.md" }
+          {
+            "filenamePattern": "*.md"
+          }
         ],
         "priority": "option"
       }
     ],
+    "configuration": {
+      "title": "HyMD Editor",
+      "properties": {
+        "hymd.ui.style": {
+          "type": "string",
+          "enum": [
+            "hymd",
+            "vscode"
+          ],
+          "enumDescriptions": [
+            "HyMD 清爽皮肤：限宽纸感正文、低饱和块卡片",
+            "VS Code 融入皮肤：M1 全宽布局与多色块边框"
+          ],
+          "default": "hymd",
+          "description": "HyMD WYSIWYG 编辑器 UI 皮肤"
+        }
+      }
+    },
     "commands": [
       {
         "command": "hymd.openWysiwyg",
         "title": "Open HyMD WYSIWYG Editor"
+      },
+      {
+        "command": "hymd.toggleUiStyle",
+        "title": "HyMD: 切换 UI 皮肤 (hymd ↔ vscode)"
+      },
+      {
+        "command": "hymd.toggleSourceMode",
+        "title": "HyMD: 切换 WYSIWYG / 源代码"
+      },
+      {
+        "command": "hymd.sheet.embedSnapshot",
+        "title": "HyMD: 嵌入 Sheet Snapshot 到块体"
+      },
+      {
+        "command": "hymd.openLayoutPreview",
+        "title": "HyMD: 打开排版预览",
+        "icon": "$(open-preview)"
       }
-    ]
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "hymd.openLayoutPreview",
+          "when": "resourceExtname == .md",
+          "group": "navigation@99"
+        }
+      ]
+    }
   },
   "scripts": {
     "build": "node esbuild.mjs",
     "watch": "node esbuild.mjs --watch",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "vitest run",
+    "test": "vitest run --config ./vitest.config.mjs",
     "package:vsix": "npm run build && npx @vscode/vsce package --no-dependencies"
   },
   "dependencies": {
-    "@hymd/parser": "*"
+    "@hymd/blocks-sheet": "*",
+    "@hymd/layout": "*",
+    "@hymd/parser": "*",
+    "@hymd/webview-core": "*"
   },
   "devDependencies": {
+    "@marp-team/marp-core": "^4.1.0",
+    "@marp-team/marpit": "^3.1.2",
     "@milkdown/crepe": "^7.15.1",
     "@milkdown/kit": "^7.15.1",
     "@milkdown/utils": "^7.15.1",
     "@types/vscode": "^1.96.0",
     "esbuild": "^0.25.5",
     "typescript": "^5.8.3",
+    "vite": "^6.3.5",
     "vitest": "^3.1.4"
   }
 }

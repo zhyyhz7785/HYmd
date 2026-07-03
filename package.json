@@ -7,15 +7,24 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "npm run build -w @hymd/parser && npm run build -w hymd-editor",
+    "build": "npm run build -w @hymd/parser && npm run build -w @hymd/blocks-sheet && npm run build -w @hymd/layout && npm run build -w @hymd/export && npm run build -w @hymd/webview-core && npm run build -w @hymd/host-web && npm run build -w hymd-editor",
     "build:parser": "npm run build -w @hymd/parser",
+    "build:blocks-sheet": "npm run build -w @hymd/blocks-sheet",
+    "build:layout": "npm run build -w @hymd/layout",
+    "build:export": "npm run build -w @hymd/export",
+    "build:webview-core": "npm run build -w @hymd/webview-core",
+    "build:host-web": "npm run build -w @hymd/host-web",
     "build:vscode": "npm run build -w hymd-editor",
+    "build:host": "npm run build:host-web && dotnet build apps/hymd-host/hymd-host.csproj -c Debug",
     "sync:fork": "node scripts/sync-to-fork.mjs",
-    "test": "npm run test -w @hymd/parser && npm run test -w hymd-editor",
-    "typecheck": "npm run typecheck -w @hymd/parser && npm run typecheck -w hymd-editor"
+    "test": "npm run test -w @hymd/blocks-sheet && npm run test -w @hymd/parser && npm run test -w @hymd/layout && npm run test -w @hymd/export && npm run test -w @hymd/webview-core && npm run test -w hymd-editor",
+    "typecheck": "npm run typecheck -w @hymd/parser && npm run typecheck -w @hymd/blocks-sheet && npm run typecheck -w @hymd/layout && npm run typecheck -w @hymd/export && npm run typecheck -w @hymd/webview-core && npm run typecheck -w @hymd/host-web && npm run typecheck -w hymd-editor"
   },
   "engines": {
     "node": ">=20"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
 }

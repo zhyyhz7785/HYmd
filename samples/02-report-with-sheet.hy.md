@@ -20,20 +20,22 @@ hymd:
 ```sheet id=load-table
 rows: 20
 cols: 8
-snapshot: ./02-report-with-sheet.hymd.assets/load-table.univer.json
+snapshot: ./02-report-with-sheet.hy.assets/load-table.univer.json
 ```
 
 ## 结论
 
-- 恒载按规范取值
-- 活载按用途分类
+* 恒载按规范取值
 
-| 项目 | 数值 |
-| --- | --- |
+* 活载按用途分类
+
+| 项目   | 数值   |
+| ---- | ---- |
 | 安全系数 | 1.35 |
 
-```layout id=summary-box
+```layout
 width_mm: 160
 height_mm: 40
 anchor: column-1
 ```
+

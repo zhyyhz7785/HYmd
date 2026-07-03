@@ -7,13 +7,14 @@ export function createSyncController(onEdit: (content: string, version: number) 
   let bufferedExternal: string | null = null;
   let debounceTimer: ReturnType<typeof setTimeout> | undefined;
   let lastExternalVersion = -1;
+  let overlayOpen = false;
 
   return {
     reset(content: string) {
       lastContent = content;
     },
     onLocalEdit(content: string) {
-      if (content === lastContent) return;
+      if (overlayOpen || content === lastContent) return;
       lastContent = content;
       version += 1;
       const v = version;
@@ -25,6 +26,12 @@ export function createSyncController(onEdit: (content: string, version: number) 
     },
     isComposing() {
       return composing;
+    },
+    setOverlayOpen(value: boolean) {
+      overlayOpen = value;
+    },
+    isOverlayOpen() {
+      return overlayOpen;
     },
     bufferExternal(content: string) {
       bufferedExternal = content;

@@ -1,5 +1,200 @@
-/* HyMD 扩展块卡片样式（M1 占位，M2 接 Univer/Marp 交互） */
-pre.hymd-block-card {
+/* HyMD 扩展块 — 双皮肤：hymd（默认清爽）/ vscode（M1 恢复） */
+
+/* ── 公共：badge 结构 ── */
+.hymd-block-badge {
+  position: absolute;
+  top: 6px;
+  left: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  user-select: none;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.hymd-block-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.hymd-block-label {
+  line-height: 1.2;
+}
+
+pre.hymd-block-card code {
+  font-size: 12px;
+  opacity: 0.92;
+}
+
+.hymd-sheet-preview-wrap {
+  margin: 8px 8px 4px;
+}
+
+.hymd-sheet-card-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+  padding: 0 4px;
+}
+
+.hymd-sheet-card-meta {
+  font-size: 11px;
+  opacity: 0.75;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hymd-sheet-preview-root,
+.hymd-sheet-editor-root {
+  width: 100%;
+  height: 100%;
+}
+
+#sheet-overlay-root {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  background: var(--vscode-editor-background, #1e1e1e);
+}
+
+#sheet-overlay-root[hidden] {
+  display: none !important;
+}
+
+.hymd-sheet-overlay-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  flex-shrink: 0;
+}
+
+.hymd-sheet-overlay-title {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.hymd-sheet-overlay-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.hymd-sheet-overlay-btn {
+  padding: 6px 14px;
+  border-radius: 4px;
+  border: 1px solid color-mix(in srgb, currentColor 25%, transparent);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.hymd-sheet-overlay-editor {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* ═══════════════════════════════════════
+   hymd 皮肤 — 清爽默认
+   ═══════════════════════════════════════ */
+body[data-ui='hymd'] pre.hymd-block-card {
+  position: relative;
+  border: 1px solid var(--vscode-widget-border, #454545);
+  border-radius: 6px;
+  padding-top: 28px !important;
+  margin: 16px 0;
+  background: var(--vscode-editor-background, #1e1e1e);
+}
+
+body[data-ui='hymd'] pre.hymd-block-card[data-hymd-block='sheet'] .hymd-block-dot {
+  background: color-mix(in srgb, #22c55e 60%, var(--vscode-editor-foreground, #ccc));
+}
+
+body[data-ui='hymd'] pre.hymd-block-card[data-hymd-block='slide'] .hymd-block-dot {
+  background: color-mix(in srgb, #a855f7 60%, var(--vscode-editor-foreground, #ccc));
+}
+
+body[data-ui='hymd'] pre.hymd-block-card[data-hymd-block='layout'] .hymd-block-dot {
+  background: color-mix(in srgb, #f59e0b 60%, var(--vscode-editor-foreground, #ccc));
+}
+
+body[data-ui='hymd'] pre.hymd-block-card[data-hymd-block='calc'] .hymd-block-dot {
+  background: color-mix(in srgb, #06b6d4 60%, var(--vscode-editor-foreground, #ccc));
+}
+
+body[data-ui='hymd'] .hymd-block-badge {
+  letter-spacing: 0.01em;
+  color: var(--vscode-descriptionForeground, #999);
+  font-weight: 500;
+  text-transform: none;
+}
+
+body[data-ui='hymd'] pre.hymd-block-card[data-hymd-block='sheet'] {
+  padding-bottom: 8px !important;
+}
+
+body[data-ui='hymd'] .hymd-sheet-edit-btn {
+  font-size: 12px;
+  padding: 2px 4px;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: var(--vscode-textLink-foreground, var(--vscode-focusBorder, #4772b3));
+  cursor: pointer;
+  text-decoration: none;
+}
+
+body[data-ui='hymd'] .hymd-sheet-edit-btn:hover {
+  text-decoration: underline;
+  background: transparent;
+}
+
+body[data-ui='hymd'] .hymd-sheet-preview-host {
+  min-height: 180px;
+  max-height: 360px;
+  overflow: hidden;
+  border-radius: 4px;
+  border: 1px solid var(--vscode-widget-border, #454545);
+  background: var(--vscode-editor-background, #1e1e1e);
+}
+
+body[data-ui='hymd'] .hymd-sheet-overlay-toolbar {
+  border-bottom: 1px solid var(--vscode-widget-border, #454545);
+  background: var(--vscode-editor-background, #1e1e1e);
+}
+
+body[data-ui='hymd'] .hymd-sheet-overlay-btn {
+  border: 1px solid var(--vscode-button-border, transparent);
+  background: var(--vscode-button-secondaryBackground, transparent);
+  color: var(--vscode-button-secondaryForeground, inherit);
+}
+
+body[data-ui='hymd'] .hymd-sheet-overlay-btn-primary {
+  border-color: var(--vscode-button-border, transparent);
+  background: var(--vscode-button-background, #0e639c);
+  color: var(--vscode-button-foreground, #fff);
+}
+
+body[data-ui='hymd'] .hymd-sheet-overlay-btn-primary:hover {
+  background: var(--vscode-button-hoverBackground, #1177bb);
+}
+
+/* ═══════════════════════════════════════
+   vscode 皮肤 — M1 恢复项
+   ═══════════════════════════════════════ */
+body[data-ui='vscode'] pre.hymd-block-card {
   position: relative;
   border: 1px solid var(--hymd-accent, #4772b3);
   border-radius: 8px;
@@ -8,36 +203,63 @@ pre.hymd-block-card {
   background: color-mix(in srgb, var(--hymd-accent, #4772b3) 8%, var(--vscode-editor-background, #1e1e1e));
 }
 
-pre.hymd-block-card[data-hymd-block='sheet'] {
+body[data-ui='vscode'] pre.hymd-block-card[data-hymd-block='sheet'] {
   border-left: 4px solid #22c55e;
+  padding-bottom: 8px !important;
 }
 
-pre.hymd-block-card[data-hymd-block='slide'] {
+body[data-ui='vscode'] pre.hymd-block-card[data-hymd-block='slide'] {
   border-left: 4px solid #a855f7;
 }
 
-pre.hymd-block-card[data-hymd-block='layout'] {
+body[data-ui='vscode'] pre.hymd-block-card[data-hymd-block='layout'] {
   border-left: 4px solid #f59e0b;
 }
 
-pre.hymd-block-card[data-hymd-block='calc'] {
+body[data-ui='vscode'] pre.hymd-block-card[data-hymd-block='calc'] {
   border-left: 4px solid #06b6d4;
 }
 
-.hymd-block-badge {
-  position: absolute;
-  top: 6px;
-  left: 10px;
-  font-size: 11px;
-  font-weight: 600;
+body[data-ui='vscode'] .hymd-block-badge {
   letter-spacing: 0.02em;
   color: var(--hymd-accent, #4772b3);
   text-transform: uppercase;
-  user-select: none;
-  pointer-events: none;
 }
 
-pre.hymd-block-card code {
+body[data-ui='vscode'] .hymd-block-dot {
+  display: none;
+}
+
+body[data-ui='vscode'] .hymd-sheet-edit-btn {
   font-size: 12px;
-  opacity: 0.92;
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid #22c55e;
+  background: color-mix(in srgb, #22c55e 12%, transparent);
+  color: inherit;
+  cursor: pointer;
+}
+
+body[data-ui='vscode'] .hymd-sheet-edit-btn:hover {
+  background: color-mix(in srgb, #22c55e 22%, transparent);
+}
+
+body[data-ui='vscode'] .hymd-sheet-preview-host {
+  min-height: 180px;
+  max-height: 360px;
+  overflow: hidden;
+  border-radius: 6px;
+  border: 1px solid color-mix(in srgb, #22c55e 30%, transparent);
+  background: var(--vscode-editor-background, #fff);
+}
+
+body[data-ui='vscode'] .hymd-sheet-overlay-toolbar {
+  border-bottom: 1px solid color-mix(in srgb, #22c55e 35%, transparent);
+  background: color-mix(in srgb, #22c55e 8%, var(--vscode-editor-background, #1e1e1e));
+}
+
+body[data-ui='vscode'] .hymd-sheet-overlay-btn-primary {
+  border-color: #22c55e;
+  background: #22c55e;
+  color: #fff;
 }

@@ -1,4 +1,4 @@
-# HyMD 格式规范 v0.1
+﻿# HyMD 格式规范 v0.1
 
 > 版本：`hymd.version: "0.1"`  
 > 状态：M0 PoC  
@@ -13,7 +13,7 @@
 
 ## 2. 文件命名
 
-- 推荐扩展名：**`.hymd.md`**
+- 推荐扩展名：**`.hy.md`**
 - 理由：`.md` 后缀保证 Typora、VS Code、GitHub 等工具直接识别为 Markdown。
 
 ## 3. Frontmatter
@@ -80,11 +80,11 @@ JSON Schema：[`schemas/frontmatter.schema.json`](schemas/frontmatter.schema.jso
 ```sheet id=load-table
 rows: 20
 cols: 8
-snapshot: ./02-report-with-sheet.hymd.assets/load-table.univer.json
+snapshot: ./02-report-with-sheet.hy.assets/load-table.univer.json
 ```
 
 ```slide id=intro-deck theme=default
-source: ./03-slide-mixed.hymd.assets/intro-deck.marp.md
+source: ./03-slide-mixed.hy.assets/intro-deck.marp.md
 ```
 
 ```layout id=figure-1
@@ -113,10 +113,10 @@ anchor: column-1
 
 ## 7. 外置 assets 约定
 
-- 目录名：`<文件名>.assets/`（与 `.hymd.md` 同目录）。
-- 示例：`02-report-with-sheet.hymd.md` → `02-report-with-sheet.hymd.assets/load-table.univer.json`
+- 目录名：`<文件名>.assets/`（与 `.hy.md` 同目录）。
+- 示例：`02-report-with-sheet.hy.md` → `02-report-with-sheet.hy.assets/load-table.univer.json`
 - M0：规范定义 + 样例引用；读写实现推迟至 M1。
-- 块体 `snapshot` / `source` 字段使用相对路径，相对于 `.hymd.md` 文件。
+- 块体 `snapshot` / `source` 字段使用相对路径，相对于 `.hy.md` 文件。
 
 ## 8. 降级规则
 
@@ -150,4 +150,4 @@ anchor: column-1
 ## 12. 参考实现
 
 - Parser：`packages/hymd-parser`
-- 样例：`samples/*.hymd.md`
+- 样例：`samples/*.hy.md`

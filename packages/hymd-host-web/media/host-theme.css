@@ -1,0 +1,41 @@
+/* 独立壳主题 token：补齐 editor.css 引用的 --vscode-* 变量 */
+:root,
+body[data-theme='light'] {
+  --vscode-editor-background: #fafafa;
+  --vscode-editor-foreground: #1f2328;
+  --vscode-sideBar-background: #f3f3f3;
+  --vscode-panel-border: #e5e5e5;
+  --vscode-focusBorder: #0078d4;
+  --vscode-button-background: #0078d4;
+  --vscode-button-foreground: #ffffff;
+  --vscode-button-hoverBackground: #106ebe;
+  --vscode-input-background: #ffffff;
+  --vscode-input-foreground: #1f2328;
+  --vscode-input-border: #cccccc;
+}
+
+body[data-theme='dark'] {
+  --vscode-editor-background: #1e1e1e;
+  --vscode-editor-foreground: #d4d4d4;
+  --vscode-sideBar-background: #252526;
+  --vscode-panel-border: #3c3c3c;
+  --vscode-focusBorder: #0078d4;
+  --vscode-button-background: #0e639c;
+  --vscode-button-foreground: #ffffff;
+  --vscode-button-hoverBackground: #1177bb;
+  --vscode-input-background: #3c3c3c;
+  --vscode-input-foreground: #cccccc;
+  --vscode-input-border: #3c3c3c;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+#editor-root {
+  height: 100vh;
+  overflow: auto;
+}

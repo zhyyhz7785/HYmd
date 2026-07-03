@@ -1,0 +1,26 @@
+{
+  "name": "@hymd/host-web",
+  "version": "0.1.0",
+  "private": true,
+  "description": "HyMD 独立编辑器壳（WPF+WebView2）的 Web 前端 — 复用 hymd-vscode webview 模块",
+  "type": "module",
+  "scripts": {
+    "build": "node esbuild.mjs",
+    "watch": "node esbuild.mjs --watch",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@hymd/blocks-sheet": "*",
+    "@hymd/parser": "*",
+    "@hymd/webview-core": "*"
+  },
+  "devDependencies": {
+    "@milkdown/crepe": "^7.15.1",
+    "@milkdown/utils": "^7.15.1",
+    "esbuild": "^0.25.5",
+    "typescript": "^5.8.3",
+    "vitest": "^3.1.4"
+  },
+  "license": "MIT"
+}

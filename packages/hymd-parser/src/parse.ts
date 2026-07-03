@@ -1,6 +1,3 @@
-import { readFileSync } from 'node:fs';
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
 import type { Root, RootContent } from 'mdast';
 import remarkFrontmatter from 'remark-frontmatter';
 import remarkGfm from 'remark-gfm';
@@ -65,10 +62,11 @@ function extractBlocks(ast: Root): HymdBlock[] {
     const attrs = parseMetaString(metaCombined);
     const bodyRaw = node.value ?? '';
     const body = parseYamlMapping(bodyRaw);
+    const bodyId = typeof body.id === 'string' ? body.id : undefined;
 
     const prefix = blockType;
     counters[prefix] = (counters[prefix] ?? 0) + 1;
-    const id = attrs.id ?? `${prefix}-${counters[prefix]}`;
+    const id = attrs.id ?? bodyId ?? `${prefix}-${counters[prefix]}`;
 
     const block: HymdBlock = {
       type: blockType,
@@ -105,18 +103,4 @@ export function parseHymd(text: string): HymdDocument {
     ast,
     raw: text,
   };
-}
-
-/** 从文件路径解析 HyMD */
-export function parseHymdFile(filePath: string): HymdDocument {
-  const text = readFileSync(filePath, 'utf8');
-  return parseHymd(text);
-}
-
-/** 解析仓库内样例（测试辅助） */
-export function parseSample(name: string): HymdDocument {
-  const here = dirname(fileURLToPath(import.meta.url));
-  const root = join(here, '..', '..', '..');
-  const filePath = join(root, 'samples', name);
-  return parseHymdFile(filePath);
 }

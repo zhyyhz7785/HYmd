@@ -1,0 +1,67 @@
+:root {
+  color-scheme: light dark;
+  --hymd-toolbar-bg: var(--vscode-editor-background, #1e1e1e);
+  --hymd-toolbar-fg: var(--vscode-editor-foreground, #cccccc);
+  --hymd-toolbar-border: var(--vscode-panel-border, #454545);
+  --hymd-viewport-bg: var(--vscode-sideBar-background, #252526);
+}
+
+body {
+  margin: 0;
+  font-family: var(--vscode-font-family, system-ui, sans-serif);
+  font-size: 13px;
+  color: var(--hymd-toolbar-fg);
+  background: var(--hymd-viewport-bg);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.hymd-layout-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--hymd-toolbar-border);
+  background: var(--hymd-toolbar-bg);
+  flex: none;
+}
+
+.hymd-layout-toolbar-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hymd-layout-toolbar button {
+  min-width: 28px;
+  height: 26px;
+  padding: 0 8px;
+  border: 1px solid var(--hymd-toolbar-border);
+  border-radius: 3px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.hymd-layout-toolbar button:hover {
+  background: var(--vscode-toolbar-hoverBackground, rgba(90, 93, 94, 0.31));
+}
+
+#page-indicator {
+  min-width: 64px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.hymd-layout-viewport {
+  flex: 1;
+  overflow: auto;
+  padding: 16px;
+}
+
+.hymd-pages {
+  margin: 0 auto;
+}

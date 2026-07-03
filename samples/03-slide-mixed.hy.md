@@ -14,7 +14,7 @@ hymd:
 HyMD 将 Marp 兼容幻灯作为 `slide` 块引用；无 HyMD 渲染器时显示为 fenced code。
 
 ```slide id=intro-deck theme=default
-source: ./03-slide-mixed.hymd.assets/intro-deck.marp.md
+source: ./03-slide-mixed.hy.assets/intro-deck.marp.md
 ```
 
 ## 讨论

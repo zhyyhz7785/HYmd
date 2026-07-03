@@ -13,12 +13,9 @@ const dest = join(forkRoot, 'extensions', 'hymd-editor');
 
 const copyList = ['package.json', 'dist', 'media'];
 
+/** parser 已 bundle 进 extension.js；此处仅保留占位说明，不再复制 node_modules */
 function copyParserDep() {
-  const parserPkg = join(root, 'packages', 'hymd-parser');
-  const parserDest = join(dest, 'node_modules', '@hymd', 'parser');
-  mkdirSync(parserDest, { recursive: true });
-  cpSync(join(parserPkg, 'dist'), join(parserDest, 'dist'), { recursive: true });
-  cpSync(join(parserPkg, 'package.json'), join(parserDest, 'package.json'));
+  // bundled — no runtime node_modules/@hymd/parser required
 }
 
 if (!existsSync(join(src, 'dist', 'extension.js'))) {

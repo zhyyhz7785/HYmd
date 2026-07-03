@@ -1,5 +1,6 @@
 node_modules/
 dist/
+*.exports/
 *.log
 .DS_Store
 Thumbs.db
@@ -9,3 +10,7 @@ coverage/
 !.vscode/launch.json
 !.vscode/tasks.json
 .idea/
+*.vsix
+packages/**/node_modules/.vite/
+apps/**/bin/
+apps/**/obj/

@@ -72,6 +72,11 @@ export function validateBlockBody(type: HymdBlockType, body: Record<string, unkn
     case 'sheet':
       if (body.rows !== undefined && typeof body.rows !== 'number') warnings.push('sheet.rows 应为 number');
       if (body.cols !== undefined && typeof body.cols !== 'number') warnings.push('sheet.cols 应为 number');
+      if (body.snapshot !== undefined && typeof body.snapshot !== 'string') warnings.push('sheet.snapshot 应为 string');
+      if (body.data !== undefined && (typeof body.data !== 'object' || body.data === null || Array.isArray(body.data))) {
+        warnings.push('sheet.data 应为 object');
+      }
+      if (body.snapshot && body.data) warnings.push('sheet 块不应同时含 snapshot 与 data');
       break;
     case 'slide':
       if (body.theme !== undefined && typeof body.theme !== 'string') warnings.push('slide.theme 应为 string');

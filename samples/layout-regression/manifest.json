@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "description": "HyMD layout-regression 样例集（移植自 HyCADTool.MarkdownEditor RegressionSamples）",
+  "frontmatter": {
+    "preset": "A4",
+    "columns": 2,
+    "margin_mm": [25, 20, 25, 20]
+  },
+  "cases": [
+    { "id": "empty", "file": "01-empty.hy.md", "focus": ["空文档", "单页空栏稳定性"] },
+    { "id": "all_cn", "file": "02-all-cn.hy.md", "focus": ["全中文", "字宽稳定"] },
+    { "id": "mixed_extreme", "file": "03-mixed-extreme.hy.md", "focus": ["中英混排极端比例"] },
+    { "id": "code_block", "file": "04-code-block.hy.md", "focus": ["代码块整块迁移"] },
+    { "id": "table_heavy", "file": "05-table-heavy.hy.md", "focus": ["表格复杂块"] },
+    { "id": "long_doc", "file": "06-long-doc.hy.md", "focus": ["长文档分栏", "跨页"] },
+    { "id": "font_consistency", "file": "07-font-consistency.hy.md", "focus": ["粗体/代码字体"] },
+    { "id": "special_symbols", "file": "08-special-symbols.hy.md", "focus": ["特殊符号兼容"] },
+    { "id": "mixed_code_table", "file": "09-mixed-code-table.hy.md", "focus": ["代码与表格混排"] },
+    { "id": "layout_consistency", "file": "10-layout-consistency.hy.md", "focus": ["列表/引用/表格/栏尾完整性"] }
+  ],
+  "manualChecklist": [
+    "打开 samples/02-report-with-sheet.hy.md → 排版预览 → A4 双栏、engineering-report 主题",
+    "状态栏几何自检偏差 ≤ 2 mm",
+    "缩放 −/+/100%/适宽、翻页指示、边距辅助线开关",
+    "对本目录 10 个样例逐一打开预览：栏尾完整、无内容丢失、翻页正确",
+    "06-long-doc 与 10-layout-consistency 应出现多页"
+  ]
+}

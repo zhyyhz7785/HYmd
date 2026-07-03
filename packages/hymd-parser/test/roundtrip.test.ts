@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest';
-import { parseHymd, parseSample } from '../src/parse.js';
+﻿import { describe, expect, it } from 'vitest';
+import { parseHymd, parseSample } from '../src/index.js';
 import { serializeHymd } from '../src/serialize.js';
 import type { HymdBlock, HymdDocument } from '../src/types.js';
 
@@ -25,9 +25,9 @@ function documentsSemanticallyEqual(a: HymdDocument, b: HymdDocument): boolean {
 }
 
 const SAMPLE_FILES = [
-  '01-basic-prose.hymd.md',
-  '02-report-with-sheet.hymd.md',
-  '03-slide-mixed.hymd.md',
+  '01-basic-prose.hy.md',
+  '02-report-with-sheet.hy.md',
+  '03-slide-mixed.hy.md',
 ] as const;
 
 describe('serializeHymd roundtrip', () => {
@@ -39,7 +39,7 @@ describe('serializeHymd roundtrip', () => {
   });
 
   it('double roundtrip remains stable on block count', () => {
-    const first = parseSample('02-report-with-sheet.hymd.md');
+    const first = parseSample('02-report-with-sheet.hy.md');
     let doc = first;
     for (let i = 0; i < 2; i++) {
       doc = parseHymd(serializeHymd(doc));
@@ -49,10 +49,10 @@ describe('serializeHymd roundtrip', () => {
   });
 
   it('serialized output still contains fenced hymd blocks', () => {
-    const doc = parseSample('02-report-with-sheet.hymd.md');
+    const doc = parseSample('02-report-with-sheet.hy.md');
     const out = serializeHymd(doc);
     expect(out).toContain('```sheet');
-    expect(out).toContain('id=load-table');
+    expect(out).toContain('```sheet id=load-table');
     expect(out).toContain('rows: 20');
   });
 });

@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+﻿import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import MarkdownIt from 'markdown-it';
@@ -14,9 +14,9 @@ import { describe, expect, it } from 'vitest';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
 
 const SAMPLE_FILES = [
-  '01-basic-prose.hymd.md',
-  '02-report-with-sheet.hymd.md',
-  '03-slide-mixed.hymd.md',
+  '01-basic-prose.hy.md',
+  '02-report-with-sheet.hy.md',
+  '03-slide-mixed.hy.md',
 ] as const;
 
 type Renderer = (md: string) => string;
@@ -34,15 +34,15 @@ const renderers: Record<string, Renderer> = {
 
 /** 样例中应出现在 prose 中的可见文本 */
 const PROSE_SNIPPETS: Record<(typeof SAMPLE_FILES)[number], string[]> = {
-  '01-basic-prose.hymd.md': ['HyMD 基础示例', 'GFM 表格'],
-  '02-report-with-sheet.hymd.md': ['设计说明', '荷载汇总表', '安全系数'],
-  '03-slide-mixed.hymd.md': ['技术汇报', '讨论', 'not a hymd block'],
+  '01-basic-prose.hy.md': ['HyMD 基础示例', 'GFM 表格'],
+  '02-report-with-sheet.hy.md': ['设计说明', '荷载汇总表', '安全系数'],
+  '03-slide-mixed.hy.md': ['技术汇报', '讨论', 'not a hymd block'],
 };
 
 /** 含扩展块的样例：降级后 code 块内应出现的片段 */
 const BLOCK_SNIPPETS: Partial<Record<(typeof SAMPLE_FILES)[number], string[]>> = {
-  '02-report-with-sheet.hymd.md': ['rows:', 'load-table'],
-  '03-slide-mixed.hymd.md': ['intro-deck', 'marp.md'],
+  '02-report-with-sheet.hy.md': ['rows:', 'load-table'],
+  '03-slide-mixed.hy.md': ['intro-deck', 'marp.md'],
 };
 
 function hasCodeFenceDegradation(html: string, snippets: string[]): boolean {
@@ -76,7 +76,7 @@ describe('degradation — 5 markdown renderers', () => {
 
 describe('degradation — ordinary code block preserved', () => {
   it('javascript block not confused with hymd sheet', () => {
-    const md = readFileSync(join(ROOT, 'samples', '03-slide-mixed.hymd.md'), 'utf8');
+    const md = readFileSync(join(ROOT, 'samples', '03-slide-mixed.hy.md'), 'utf8');
     const html = renderers.remark(md);
     expect(html).toContain('not a hymd block');
     expect(html.toLowerCase()).toMatch(/language-javascript|class="language-js"/);
